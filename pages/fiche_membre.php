@@ -4,7 +4,7 @@ include('../inc/function.php');
 session_start();
 
 $id_membre = $_SESSION['user']['id_membre'];
-$id_emprunt = $_SESSION['user']['id_emprunt'];
+// $id_emprunt = $_SESSION['user']['id_emprunt'];
 $membre = getMembre($bdd, $id_membre);
 $objets = getObjetsParCategorie($bdd, $id_membre);
 $liste = liste_emprunt($bdd, $id_membre);
