@@ -1,4 +1,3 @@
-
 <?php
     function inscription($bdd, $nom, $date_naissance, $email, $ville, $mdp, $image_membre) {
         $sql = "INSERT INTO Exam_Membres (nom, date_naissance, email, ville, mdp, image_membre) VALUES ('%s','%s' , '%s', '%s', '%s', '%s')";
@@ -80,12 +79,33 @@ function getObjetsParCategorie($bdd, $id_membre) {
     return $objets;
 }
 
+
 function emprunter($bdd , $id_objet , $id_membre, $number_days) {
     $date_emprunt = date('Y-m-d');
     $date_retour = date('Y-m-d', strtotime("+$number_days days"));
     $sql = "INSERT INTO Exam_Emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES ('%s', '%s', '%s', '%s')";
     $sql = sprintf($sql, $id_objet, $id_membre, $date_emprunt, $date_retour);
     // echo $sql;
+    $result = mysqli_query($bdd, $sql);
+    return $result;
+}
+
+function liste_emprunt($bdd, $id_membre) {
+    $sql = "SELECT e.id_emprunt, o.nom_objet, e.date_emprunt, e.date_retour
+            FROM Exam_Emprunt e
+            JOIN Exam_Objet o ON e.id_objet = o.id_objet
+            WHERE e.id_membre = '$id_membre'";
+    $result = mysqli_query($bdd, $sql);
+    $emprunts = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $emprunts[] = $row;
+    }
+    return $emprunts;
+}
+
+function retourner_objet($bdd, $id_emprunt) {
+    $sql = "DELETE FROM Exam_Emprunt WHERE id_emprunt = '%s'";
+    $sql = sprintf($sql, $id_emprunt);
     $result = mysqli_query($bdd, $sql);
     return $result;
 }

@@ -4,8 +4,11 @@ include('../inc/function.php');
 session_start();
 
 $id_membre = $_SESSION['user']['id_membre'];
+$id_emprunt = $_SESSION['user']['id_emprunt'];
 $membre = getMembre($bdd, $id_membre);
 $objets = getObjetsParCategorie($bdd, $id_membre);
+$liste = liste_emprunt($bdd, $id_membre);
+$emprunt = retourner_objet($bdd, $id_emprunt);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,6 +51,27 @@ $objets = getObjetsParCategorie($bdd, $id_membre);
             </div>
         </div>
     <?php } ?>
-</div>
+    <h4>Historique des emprunts</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Objet</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($liste as $emprunt) { ?>
+            <tr>
+                <td><?php echo ($emprunt['nom_objet']); ?></td>
+                <td>
+                    <?php if (!empty($emprunt['date_retour']) && strtotime($emprunt['date_retour']) >= strtotime(date('Y-m-d'))) { ?>
+                        <form action="traitement_retour.php" method="post" style="display:inline;">
+                            <input type="hidden" name="id_emprunt" value="<?php echo $emprunt['id_emprunt']; ?>">
+                            <button type="submit" class="btn btn-warning btn-sm">Retourner</button>
+                        </form>
+                    <?php } ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </div>
 </body>
 </html>

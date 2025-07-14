@@ -5,3 +5,4 @@
     $number_days = $_POST['jours'];
     $emprunt = emprunter($bdd, $id_objet, $id_membre, $number_days);
 ?>
+<div class="container"></div>
