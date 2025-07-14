@@ -8,7 +8,7 @@ $id_membre = $_SESSION['user']['id_membre'];
 $membre = getMembre($bdd, $id_membre);
 $objets = getObjetsParCategorie($bdd, $id_membre);
 $liste = liste_emprunt($bdd, $id_membre);
-$emprunt = retourner_objet($bdd, $id_emprunt);
+$emprunt = retourner_objet($bdd, $id_membre);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
