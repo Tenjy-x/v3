@@ -45,7 +45,7 @@
                         <?php if ($objet['date_retour']) { ?>
                             <p class="card-text text-danger">Emprunté, retour le <?php echo $objet['date_retour']; ?></p>
                         <?php } else {?>
-                            <form action="affiche_emprunt.php" method="post" class="d-flex align-items-center gap-2">
+                            <form action="modal.php?page=affiche_emprunt" method="post" class="d-flex align-items-center gap-2">
                                 <input type="hidden" name="id_objet" value="<?php echo $objet['id_objet']; ?>">
                                 <input type="hidden" name="id_membre" value="<?php echo $id_membre; ?>">
                                 <input type="number" name="jours" min="1" max="30" placeholder="Jours" class="form-control form-control-sm" style="width:80px;" required>

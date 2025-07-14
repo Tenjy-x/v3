@@ -13,7 +13,7 @@
             LEFT JOIN Exam_Image_Objet img ON o.id_objet = img.id_objet
             LEFT JOIN Exam_Emprunt e ON o.id_objet = e.id_objet
             WHERE o.id_membre = '$id_membre'";
-    // echo $sql;
+    echo $sql;
     $result = mysqli_query($bdd, $sql);
     $liste = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -78,5 +78,15 @@ function getObjetsParCategorie($bdd, $id_membre) {
         $objets[$row['nom_categorie']][] = $row;
     }
     return $objets;
+}
+
+function emprunter($bdd , $id_objet , $id_membre, $number_days) {
+    $date_emprunt = date('Y-m-d');
+    $date_retour = date('Y-m-d', strtotime("+$number_days days"));
+    $sql = "INSERT INTO Exam_Emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES ('%s', '%s', '%s', '%s')";
+    $sql = sprintf($sql, $id_objet, $id_membre, $date_emprunt, $date_retour);
+    // echo $sql;
+    $result = mysqli_query($bdd, $sql);
+    return $result;
 }
 ?>
