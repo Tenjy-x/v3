@@ -1,0 +1,25 @@
+        .accueil-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        .accueil-container h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 24px;
+        }
+        .objet-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            font-size: 1.1em;
+        }
+        .objet-emprunt {
+            color: #dc3545;
+            font-weight: bold;
+        }
